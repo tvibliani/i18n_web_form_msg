@@ -2,14 +2,70 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Form Error Message i18n - Test</title>
+        <title>Form Error Message i18n - Test message translation</title>
     </head>
 
     <body>
-        
 
+        <form action="#" method="GET">
+
+            <br><br>
+            <label >Required selection field</label><br>
+            <select name="title">
+                <option selected="selected" value="">-- select option --</option>
+                <option value="mr">Mr</option>
+                <option value="ms">Ms</option>
+            </select>
+
+            <br><br>
+            <label >Required text field</label><br>
+            <input required="required" name="anytext" type="text">
+
+            <br><br>
+            <label >Required text field (min 3 characters)</label><br>
+            <input required="required" name="anytextmin3char" pattern=".{3,}" title="3 characters minimum" type="text">
+
+            <br><br>
+            <label >Required text field (3 to 5 characters)</label><br>
+            <input required="required" name="anytext3to5char"  pattern=".{3,5}" title="3 to 5 characters" type="text">
+
+            <br><br>
+            <label >Required text field [0 OR (3 to 5) characters]</label><br>
+            <input required="required" name="anytext0or3to5char"  pattern=".{0}|.{3,5}" title="Either 0 OR (3 to 5 chars)" type="text">
+
+            <br><br>
+            <label >Required text field (0 OR (min 3) characters)</label><br>
+            <input required="required" name="anytext0ormin3char"  pattern=".{0}|.{3,}" title="Either 0 OR (3 chars minimum)" type="text">
+
+            <br><br>
+            <label >Required email field</label><br>
+            <input required="required" name="email" type="email">
+
+            <br><br>
+            <label >Required phone number</label><br>
+            <input required="required" name="phone" type="tel">
+
+            <br><br>
+            <label >Required number field</label><br>
+            <input required="required" name="anynumber" type="number">
+
+            <br><br>
+            <label >Required textarea field</label><br>
+            <textarea required="required" name="anylongtext" ></textarea>
+
+            <br><br>
+            <label >Required textarea field (max 5)</label><br>
+            <textarea required="required" name="longtext5char" maxlength="5"></textarea>
+
+            <br><br>
+            <label >Required file upload field</label><br>
+            <input required="required" name="anyfile" type="file">
+
+            <br><br>
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>                
 
 
     </body>
-
 </html>

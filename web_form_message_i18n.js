@@ -29,23 +29,23 @@ function tr(str){
 }
 
 var messages = {
-    required: tr("This field is required."), //found
-    remote: tr("Please fix this field."), //??
-    email: tr("Please enter a valid email address."), //found
-    url: tr("Please enter a valid URL."), //found
-    date: tr("Please enter a valid date."), //found
-    dateISO: tr("Please enter a valid date (ISO)."), //??
-    number: tr("Please enter a number."), //found
-    digits: tr("Please enter only digits."), //??
-    creditcard: tr("Please enter a valid credit card number."), //??
-    equalTo: tr("Please enter the same value again."), //??
-    accept: tr("Please enter a value with a valid extension."), //??
-    maxlength: tr("Please enter no more than {0} characters."), //found
-    minlength: tr("Please enter at least {0} characters."), //found
-    rangelength: tr("Please enter a value between {0} and {1} characters long."), //??
-    range: tr("Please enter a value between {0} and {1}."), //??
-    max: tr("Please enter a value less than or equal to {0}."), //found
-    min: tr("Please enter a value greater than or equal to {0}."), //found
+    required: tr("This field is required."), 
+    remote: tr("Please fix this field."), //TOCHECK
+    email: tr("Please enter a valid email address."), 
+    url: tr("Please enter a valid URL."), 
+    date: tr("Please enter a valid date."), 
+    dateISO: tr("Please enter a valid date (ISO)."), //TOCHECK
+    number: tr("Please enter a number."), 
+    digits: tr("Please enter only digits."), //TOCHECK
+    creditcard: tr("Please enter a valid credit card number."), //TOCHECK
+    equalTo: tr("Please enter the same value again."), //TOCHECK
+    accept: tr("Please enter a value with a valid extension."), //TOCHECK
+    maxlength: tr("Please enter no more than {0} characters."), 
+    minlength: tr("Please enter at least {0} characters."), 
+    rangelength: tr("Please enter a value between {0} and {1} characters long."), //TOCHECK
+    range: tr("Please enter a value between {0} and {1}."), //TOCHECK
+    max: tr("Please enter a value less than or equal to {0}."), 
+    min: tr("Please enter a value greater than or equal to {0}."), 
     step: tr("Please enter a valid value. The two nearest valid values are {0} and {1}."),  //added
     pattern: tr("Please match the requested format: {0} . "), //added
     select: tr("Please select an item in the list.") //added

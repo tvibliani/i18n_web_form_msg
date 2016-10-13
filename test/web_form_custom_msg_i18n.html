@@ -9,6 +9,30 @@
                 crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="../web_form_message_i18n.js"></script>
+        <script type="text/javascript">
+
+            function my_translator(str) {
+                /*
+                 * A dummy translator function, simply returns original string prefixed with "TRANSLATED: "
+                 * and so it mimics a translator function that should be used in a real application.
+                 * This function is made only for testing purposes.
+                 * 
+                 */
+                return "TRANSLATED: " + str;
+            }
+
+            $(document).ready(function(){
+
+                // Initialise error message translations:
+                init_web_form_message_i18n( my_translator );
+
+                // Set custom messages to the desired selection of fields of html form:
+                $("input, select, textarea").set_err_message_i18n();
+
+            });
+
+        </script>
+
     </head>
 
     <body>
@@ -22,6 +46,10 @@
                 <option value="mr">Mr</option>
                 <option value="ms">Ms</option>
             </select>
+
+            <br><br>
+            <label >Required email field</label><br>
+            <input required="required" name="email" type="email">
 
             <br><br>
             <label >Required text field</label><br>
@@ -42,10 +70,6 @@
             <br><br>
             <label >Required text field (0 OR (min 3) characters)</label><br>
             <input required="required" name="anytext0ormin3char"  pattern=".{0}|.{3,}" title="Either 0 OR (3 chars minimum)" type="text">
-
-            <br><br>
-            <label >Required email field</label><br>
-            <input required="required" name="email" type="email">
 
             <br><br>
             <label >Required phone number</label><br>

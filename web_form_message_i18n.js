@@ -33,7 +33,8 @@
         }
 
         var messages = {
-            required: tr("This field is required."), 
+            required: tr("This field is required."),
+            select_required: tr("Please select an item in the list."),
             remote: tr("Please fix this field."), //TOCHECK
             email: tr("Please enter a valid email address."), 
             url: tr("Please enter a valid URL."), 
@@ -56,64 +57,72 @@
         };
 
 
-        $('input, select').on('change', function() {
-            var e = $(this).get(0);
-
-            e.setCustomValidity("");
-            if (!e.validity.valid) {
+        var init_error_message = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
                 var msg;
-                if(e.validity.valueMissing && e.hasAttribute('required')){
-                    msg = messages.required;
+                if(e.target.validity.valueMissing && e.target.hasAttribute('required')){
+                    if ( $( e.target ).prop("tagName").toUpperCase() === "SELECT"){
+                        msg = messages.select_required;
+                    } else {
+                        msg = messages.required;
+                    }
                 }
-                else if(e.validity.badInput && e.type == 'number'){
+                else if(e.target.validity.badInput && e.target.type == 'number'){
                     msg = messages.number;
                 }
-                else if(e.validity.typeMismatch && e.type == 'email'){
+                else if(e.target.validity.typeMismatch && e.target.type == 'email'){
                     msg = messages.email;
                 }
-                else if(e.validity.typeMismatch && e.type == 'urld'){
+                else if(e.target.validity.typeMismatch && e.target.type == 'urld'){
                     msg = messages.url;
                 }
-                else if(e.validity.patternMismatch && e.getAttribute("pattern") != 'undefined'){
-                    msg = messages.pattern.replace('{0}', e.pattern);
+                else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
+                    msg = messages.pattern.replace('{0}', e.target.pattern);
                 }
 
-                else if(e.validity.rangeUnderflow && e.type == 'number' && e.getAttribute("min") != 'undefined'){
-                    msg = messages.min.replace('{0}', e.min);
+                else if(e.target.validity.rangeUnderflow && e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
+                    msg = messages.min.replace('{0}', e.target.min);
                 }
 
-                else if(e.validity.rangeOverflow && e.type == 'number' && e.getAttribute("max") != 'undefined'){
-                    msg = messages.max.replace('{0}', e.getAttribute('max'));
+                else if(e.target.validity.rangeOverflow && e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
+                    msg = messages.max.replace('{0}', e.target.getAttribute('max'));
                 }
-                else if(e.validity.stepMismatch && e.type == 'number' && e.getAttribute("step") != 'undefined'){
+                else if(e.target.validity.stepMismatch && e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
                     var start, step, val, min, max;
                     start = 0;
-                    if(e.getAttribute("min") != 'undefined') start = parseInt(e.getAttribute("min"));
-                    step = parseInt(e.e.getAttribute("step"));
-                    val = parseInt(e.e.getAttribute("value"));
+                    if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
+                    step = parseInt(e.target.e.target.getAttribute("step"));
+                    val = parseInt(e.target.e.target.getAttribute("value"));
                     min = Math.floor((val)/step)*step;
                     max = min + step;
                     msg = messages.step;
                     msg = msg.replace('{0}', min);
                     msg = msg.replace('{1}', max);
                 }
-                else if(e.validity.tooLong && e.getAttribute("maxlength") != 'undefined' ){
-                    msg = messages.maxlength.replace('{0}', e.maxlength);
+                else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
+                    msg = messages.maxlength.replace('{0}', e.target.maxlength);
                 }
-                else if(e.validity.tooShort && e.getAttribute("minlength") != 'undefined'){
-                    msg = messages.minlength.replace('{0}', e.getAttribute("minlength"));
+                else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
+                    msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
                 }
-                else if(e.type == 'date'){
+                else if(e.target.type == 'date'){
                     msg = messages.date;
                 }
                 else {
-                    msg = tr(e.validationMessage);
+                    msg = tr("Invalid value");
                 }
-                e.setCustomValidity(msg);
+                e.target.setCustomValidity(msg);
             }
+        };
 
+        $("input,select,textarea").each(function(i, e_target){
+            e_target.oninvalid = init_error_message;
+            e_target.oninput = function(e) {
+                e.preventDefault();
+                init_error_message(e);
+            };
         });
-
 
     });
 

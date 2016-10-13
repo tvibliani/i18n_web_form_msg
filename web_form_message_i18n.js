@@ -28,104 +28,111 @@
 
     $(document).ready(function(){
 
+
+
         window.init_web_form_message_i18n = function(tr){
-
-        var messages = {
-            required: tr("This field is required."),
-            select_required: tr("Please select an item in the list."),
-            remote: tr("Please fix this field."), //TOCHECK
-            email: tr("Please enter a valid email address."), 
-            url: tr("Please enter a valid URL."), 
-            date: tr("Please enter a valid date."), 
-            dateISO: tr("Please enter a valid date (ISO)."), //TOCHECK
-            number: tr("Please enter a number."), 
-            digits: tr("Please enter only digits."), //TOCHECK
-            creditcard: tr("Please enter a valid credit card number."), //TOCHECK
-            equalTo: tr("Please enter the same value again."), //TOCHECK
-            accept: tr("Please enter a value with a valid extension."), //TOCHECK
-            maxlength: tr("Please enter no more than {0} characters."), 
-            minlength: tr("Please enter at least {0} characters."), 
-            rangelength: tr("Please enter a value between {0} and {1} characters long."), //TOCHECK
-            range: tr("Please enter a value between {0} and {1}."), //TOCHECK
-            max: tr("Please enter a value less than or equal to {0}."), 
-            min: tr("Please enter a value greater than or equal to {0}."), 
-            step: tr("Please enter a valid value. The two nearest valid values are {0} and {1}."),  //added
-            pattern: tr("Please match the requested format: {0}."), //added
-            select: tr("Please select an item in the list.") //added
-        };
+            /*
+             * 
+             */
 
 
-        var init_error_message = function(e) {
-            e.target.setCustomValidity("");
-            if (!e.target.validity.valid) {
-                var msg;
-                if(e.target.validity.valueMissing && e.target.hasAttribute('required')){
-                    if ( $( e.target ).prop("tagName").toUpperCase() === "SELECT"){
-                        msg = messages.select_required;
-                    } else {
-                        msg = messages.required;
+            var messages = {
+                required: tr("This field is required."),
+                select_required: tr("Please select an item in the list."),
+                remote: tr("Please fix this field."), //TOCHECK
+                email: tr("Please enter a valid email address."), 
+                url: tr("Please enter a valid URL."), 
+                date: tr("Please enter a valid date."), 
+                dateISO: tr("Please enter a valid date (ISO)."), //TOCHECK
+                number: tr("Please enter a number."), 
+                digits: tr("Please enter only digits."), //TOCHECK
+                creditcard: tr("Please enter a valid credit card number."), //TOCHECK
+                equalTo: tr("Please enter the same value again."), //TOCHECK
+                accept: tr("Please enter a value with a valid extension."), //TOCHECK
+                maxlength: tr("Please enter no more than {0} characters."), 
+                minlength: tr("Please enter at least {0} characters."), 
+                rangelength: tr("Please enter a value between {0} and {1} characters long."), //TOCHECK
+                range: tr("Please enter a value between {0} and {1}."), //TOCHECK
+                max: tr("Please enter a value less than or equal to {0}."), 
+                min: tr("Please enter a value greater than or equal to {0}."), 
+                step: tr("Please enter a valid value. The two nearest valid values are {0} and {1}."),  //added
+                pattern: tr("Please match the requested format: {0}."), //added
+                select: tr("Please select an item in the list.") //added
+            };
+
+
+            var init_error_message = function(e) {
+                e.target.setCustomValidity("");
+                if (!e.target.validity.valid) {
+                    var msg;
+                    if(e.target.validity.valueMissing && e.target.hasAttribute('required')){
+                        if ( $( e.target ).prop("tagName").toUpperCase() === "SELECT"){
+                            msg = messages.select_required;
+                        } else {
+                            msg = messages.required;
+                        }
                     }
-                }
-                else if(e.target.validity.badInput && e.target.type == 'number'){
-                    msg = messages.number;
-                }
-                else if(e.target.validity.typeMismatch && e.target.type == 'email'){
-                    msg = messages.email;
-                }
-                else if(e.target.validity.typeMismatch && e.target.type == 'urld'){
-                    msg = messages.url;
-                }
-                else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
-                    msg = messages.pattern.replace('{0}', e.target.pattern);
-                }
+                    else if(e.target.validity.badInput && e.target.type == 'number'){
+                        msg = messages.number;
+                    }
+                    else if(e.target.validity.typeMismatch && e.target.type == 'email'){
+                        msg = messages.email;
+                    }
+                    else if(e.target.validity.typeMismatch && e.target.type == 'urld'){
+                        msg = messages.url;
+                    }
+                    else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
+                        msg = messages.pattern.replace('{0}', e.target.pattern);
+                    }
 
-                else if(e.target.validity.rangeUnderflow && e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
-                    msg = messages.min.replace('{0}', e.target.min);
-                }
+                    else if(e.target.validity.rangeUnderflow && e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
+                        msg = messages.min.replace('{0}', e.target.min);
+                    }
 
-                else if(e.target.validity.rangeOverflow && e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
-                    msg = messages.max.replace('{0}', e.target.getAttribute('max'));
+                    else if(e.target.validity.rangeOverflow && e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
+                        msg = messages.max.replace('{0}', e.target.getAttribute('max'));
+                    }
+                    else if(e.target.validity.stepMismatch && e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
+                        var start, step, val, min, max;
+                        start = 0;
+                        if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
+                        step = parseInt(e.target.e.target.getAttribute("step"));
+                        val = parseInt(e.target.e.target.getAttribute("value"));
+                        min = Math.floor((val)/step)*step;
+                        max = min + step;
+                        msg = messages.step;
+                        msg = msg.replace('{0}', min);
+                        msg = msg.replace('{1}', max);
+                    }
+                    else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
+                        msg = messages.maxlength.replace('{0}', e.target.maxlength);
+                    }
+                    else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
+                        msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
+                    }
+                    else if(e.target.type == 'date'){
+                        msg = messages.date;
+                    }
+                    else {
+                        msg = tr("Invalid value");
+                    }
+                    e.target.setCustomValidity(msg);
                 }
-                else if(e.target.validity.stepMismatch && e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
-                    var start, step, val, min, max;
-                    start = 0;
-                    if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
-                    step = parseInt(e.target.e.target.getAttribute("step"));
-                    val = parseInt(e.target.e.target.getAttribute("value"));
-                    min = Math.floor((val)/step)*step;
-                    max = min + step;
-                    msg = messages.step;
-                    msg = msg.replace('{0}', min);
-                    msg = msg.replace('{1}', max);
-                }
-                else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
-                    msg = messages.maxlength.replace('{0}', e.target.maxlength);
-                }
-                else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
-                    msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
-                }
-                else if(e.target.type == 'date'){
-                    msg = messages.date;
-                }
-                else {
-                    msg = tr("Invalid value");
-                }
-                e.target.setCustomValidity(msg);
-            }
-        };
+            };
+
 
             $.fn.set_err_message_i18n = function() {
                 this.each(function(i, e_target){
-            e_target.oninvalid = init_error_message;
-            e_target.oninput = function(e) {
-                e.preventDefault();
-                init_error_message(e);
-            };
-        });
+                    e_target.oninvalid = init_error_message;
+                    e_target.oninput = function(e) {
+                        e.preventDefault();
+                        init_error_message(e);
+                    };
+                });
                 return this;
             };
 
-        }
+        };
 
     });
 

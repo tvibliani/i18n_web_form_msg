@@ -23,6 +23,10 @@
  * SOFTWARE.
  */
 
+(function( $ ) {
+    'use strict';
+    
+    $(document).ready(function(){
 
 function tr(str){
     return "TRANSLATED " + str;
@@ -109,5 +113,9 @@ $('input, select').on('change', function() {
     }
 
 });
-;
+
+
+    });
+
+}( jQuery ));
 

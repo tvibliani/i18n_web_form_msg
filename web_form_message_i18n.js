@@ -28,9 +28,7 @@
 
     $(document).ready(function(){
 
-        function tr(str){
-            return "TRANSLATED " + str;
-        }
+        window.init_web_form_message_i18n = function(tr){
 
         var messages = {
             required: tr("This field is required."),
@@ -116,13 +114,18 @@
             }
         };
 
-        $("input,select,textarea").each(function(i, e_target){
+            $.fn.set_err_message_i18n = function() {
+                this.each(function(i, e_target){
             e_target.oninvalid = init_error_message;
             e_target.oninput = function(e) {
                 e.preventDefault();
                 init_error_message(e);
             };
         });
+                return this;
+            };
+
+        }
 
     });
 

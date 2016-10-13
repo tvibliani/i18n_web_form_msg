@@ -28,11 +28,23 @@
 
     $(document).ready(function(){
 
-
+        $.fn.set_err_message_i18n = function() {
+            /*
+             *  A placeholder function remainder, just in case.
+             */
+            var init_fn_name = "init_web_form_message_i18n";
+            console.error("Please call a " + init_fn_name +
+                    " function first, before using this function," +
+                    " in order to initialize error message translations");
+            throw "Error message i18n is uninitialized!";
+        };
 
         window.init_web_form_message_i18n = function(tr){
             /*
+             * This function initializes i18n for custom error messages for web form fields
              * 
+             * tr - argument should be a translator function accepting an english string 
+             *      as an argument and returning translated (to the desired language) string.
              */
 
 

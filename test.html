@@ -52,6 +52,14 @@
             <input required="required" name="email" type="email">
 
             <br><br>
+            <label >Optional URL field</label><br>
+            <input type="url" name="opturl"><br>
+
+            <br><br>
+            <label >Required URL field</label><br>
+            <input required="required" type="url" name="anyurl"><br>
+
+            <br><br>
             <label >Required text field</label><br>
             <input required="required" name="anytext" type="text">
 
@@ -65,11 +73,11 @@
 
             <br><br>
             <label >Optional text field [0 OR (3 to 5) characters]</label><br>
-            <input name="anytext0or3to5char"  pattern=".{0}|.{3,5}" title="Either 0 OR (3 to 5 chars)" type="text">
+            <input name="opttext0or3to5char"  pattern=".{0}|.{3,5}" title="Either 0 OR (3 to 5 chars)" type="text">
 
             <br><br>
             <label >Optional text field (0 OR (min 3) characters)</label><br>
-            <input name="anytext0ormin3char"  pattern=".{0}|.{3,}" title="Either 0 OR (3 chars minimum)" type="text">
+            <input name="opttext0ormin3char"  pattern=".{0}|.{3,}" title="Either 0 OR (3 chars minimum)" type="text">
 
             <br><br>
             <label >Required phone number</label><br>

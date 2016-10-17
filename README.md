@@ -1,4 +1,4 @@
-# i18n_web_form_msg
+# web_form_message_i18n
 Internationalization of custom web form error messages
 
  - Translatable custom error messages for web form inputs

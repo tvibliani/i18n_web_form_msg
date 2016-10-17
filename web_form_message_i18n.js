@@ -51,6 +51,8 @@
             var messages = {
                 required: tr("This field is required."),
                 select_required: tr("Please select an item in the list."),
+                file_required: tr("Please choose a file."),
+                url_required: tr("Please enter a URL."), 
                 remote: tr("Please fix this field."), //TOCHECK
                 email: tr("Please enter a valid email address."), 
                 url: tr("Please enter a valid URL."), 
@@ -78,8 +80,15 @@
                 if (!e.target.validity.valid) {
                     var msg;
                     if(e.target.validity.valueMissing && e.target.hasAttribute('required')){
-                        if ( $( e.target ).prop("tagName").toUpperCase() === "SELECT"){
+                        var tagname = $( e.target ).prop("tagName").toUpperCase();
+                        if ( tagname === "SELECT"){
                             msg = messages.select_required;
+                        }
+                        else if (e.target.type == "file") {
+                            msg = messages.file_required;
+                        }
+                        else if (e.target.type == "url") {
+                            msg = messages.url_required;
                         } else {
                             msg = messages.required;
                         }
@@ -90,7 +99,7 @@
                     else if(e.target.validity.typeMismatch && e.target.type == 'email'){
                         msg = messages.email;
                     }
-                    else if(e.target.validity.typeMismatch && e.target.type == 'urld'){
+                    else if(e.target.validity.typeMismatch && e.target.type == 'url'){
                         msg = messages.url;
                     }
                     else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){

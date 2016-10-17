@@ -52,7 +52,6 @@
                 required: tr("This field is required."),
                 select_required: tr("Please select an item in the list."),
                 file_required: tr("Please choose a file."),
-                url_required: tr("Please enter a URL."), 
                 remote: tr("Please fix this field."), //TOCHECK
                 email: tr("Please enter a valid email address."), 
                 url: tr("Please enter a valid URL."), 
@@ -86,9 +85,6 @@
                         }
                         else if (e.target.type == "file") {
                             msg = messages.file_required;
-                        }
-                        else if (e.target.type == "url") {
-                            msg = messages.url_required;
                         } else {
                             msg = messages.required;
                         }

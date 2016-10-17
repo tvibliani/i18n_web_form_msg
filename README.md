@@ -3,6 +3,9 @@ Internationalization of custom web form error messages
 
  - Translatable custom error messages for web form inputs
 
+# References
+  - [HTML5 constraint validation API](https://www.w3.org/TR/html5/forms.html#the-constraint-validation-api) documentation by W3C
+  - [Customized error messages](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/Data_form_validation#Customized_error_messages) documentation by Mozilla
 
 # Copyright and license
 

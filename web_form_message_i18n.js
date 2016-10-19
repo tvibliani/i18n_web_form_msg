@@ -148,7 +148,7 @@
                         }
                     }
                     else if(field.validity.customError) {
-                        // TODO
+                        msg = field.validationMessage;
                     }
                     else if(field.type == 'date'){ //FIXME: move it to the third level
                         msg = messages.date;

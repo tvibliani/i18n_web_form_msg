@@ -146,6 +146,9 @@
                             msg = messages.number;
                         }
                     }
+                    else if(e.target.validity.customError) {
+                        // TODO
+                    }
                     else if(e.target.type == 'date'){ //FIXME: move it to the third level
                         msg = messages.date;
                     }

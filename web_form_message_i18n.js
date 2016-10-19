@@ -73,7 +73,8 @@
                 min: tr("Please enter a value greater than or equal to {0}."), 
                 step: tr("Please enter a valid value. The two nearest valid values are {0} and {1}."),  //added
                 pattern: tr("Please match the requested format: {0}."), //added
-                select: tr("Please select an item in the list.") //added
+                select: tr("Please select an item in the list."), //added
+                unknown_invalid_value: tr("Invalid value"),
             };
 
 
@@ -135,8 +136,9 @@
                     else if(e.target.type == 'date'){
                         msg = messages.date;
                     }
-                    else {
-                        msg = tr("Invalid value");
+
+                    if (msg === undefined) {
+                        msg = messages.unknown_invalid_value;
                     }
                     e.target.setCustomValidity(msg);
                 }

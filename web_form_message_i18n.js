@@ -92,9 +92,6 @@
                             msg = messages.required;
                         }
                     }
-                    else if(e.target.validity.badInput && e.target.type == 'number'){
-                        msg = messages.number;
-                    }
                     else if(e.target.validity.typeMismatch) {
                         if (e.target.type == 'email'){
                             msg = messages.email;
@@ -105,6 +102,12 @@
                     }
                     else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
                         msg = messages.pattern.replace('{0}', e.target.pattern);
+                    }
+                    else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
+                        msg = messages.maxlength.replace('{0}', e.target.maxlength);
+                    }
+                    else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
+                        msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
                     }
 
                     else if(e.target.validity.rangeUnderflow && e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
@@ -126,11 +129,8 @@
                         msg = msg.replace('{0}', min);
                         msg = msg.replace('{1}', max);
                     }
-                    else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
-                        msg = messages.maxlength.replace('{0}', e.target.maxlength);
-                    }
-                    else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
-                        msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
+                    else if(e.target.validity.badInput && e.target.type == 'number'){
+                        msg = messages.number;
                     }
                     else if(e.target.type == 'date'){
                         msg = messages.date;

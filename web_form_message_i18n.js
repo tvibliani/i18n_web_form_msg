@@ -95,11 +95,13 @@
                     else if(e.target.validity.badInput && e.target.type == 'number'){
                         msg = messages.number;
                     }
-                    else if(e.target.validity.typeMismatch && e.target.type == 'email'){
-                        msg = messages.email;
-                    }
-                    else if(e.target.validity.typeMismatch && e.target.type == 'url'){
-                        msg = messages.url;
+                    else if(e.target.validity.typeMismatch) {
+                        if (e.target.type == 'email'){
+                            msg = messages.email;
+                        }
+                        else if(e.target.type == 'url'){
+                            msg = messages.url;
+                        }
                     }
                     else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
                         msg = messages.pattern.replace('{0}', e.target.pattern);

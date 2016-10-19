@@ -101,39 +101,52 @@
                             msg = messages.url;
                         }
                     }
-                    else if(e.target.validity.patternMismatch && e.target.getAttribute("pattern") != 'undefined'){
-                        msg = messages.pattern.replace('{0}', e.target.pattern);
+                    else if(e.target.validity.patternMismatch) {
+                        if(e.target.getAttribute("pattern") != 'undefined'){
+                            msg = messages.pattern.replace('{0}', e.target.pattern);
+                        }
                     }
-                    else if(e.target.validity.tooLong && e.target.getAttribute("maxlength") != 'undefined' ){
-                        msg = messages.maxlength.replace('{0}', e.target.maxlength);
+                    else if(e.target.validity.tooLong) {
+                        if(e.target.getAttribute("maxlength") != 'undefined' ){
+                            msg = messages.maxlength.replace('{0}', e.target.maxlength);
+                        }
                     }
-                    else if(e.target.validity.tooShort && e.target.getAttribute("minlength") != 'undefined'){
-                        msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
+                    else if(e.target.validity.tooShort) {
+                        if(e.target.getAttribute("minlength") != 'undefined'){
+                            msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
+                        }
                     }
 
-                    else if(e.target.validity.rangeUnderflow && e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
-                        msg = messages.min.replace('{0}', e.target.min);
+                    else if(e.target.validity.rangeUnderflow) {
+                        if(e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
+                            msg = messages.min.replace('{0}', e.target.min);
+                        }
                     }
-
-                    else if(e.target.validity.rangeOverflow && e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
-                        msg = messages.max.replace('{0}', e.target.getAttribute('max'));
+                    else if(e.target.validity.rangeOverflow) {
+                        if(e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
+                            msg = messages.max.replace('{0}', e.target.getAttribute('max'));
+                        }
                     }
-                    else if(e.target.validity.stepMismatch && e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
-                        var start, step, val, min, max;
-                        start = 0;
-                        if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
-                        step = parseInt(e.target.e.target.getAttribute("step"));
-                        val = parseInt(e.target.e.target.getAttribute("value"));
-                        min = Math.floor((val)/step)*step;
-                        max = min + step;
-                        msg = messages.step;
-                        msg = msg.replace('{0}', min);
-                        msg = msg.replace('{1}', max);
+                    else if(e.target.validity.stepMismatch) {
+                        if(e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
+                            var start, step, val, min, max;
+                            start = 0;
+                            if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
+                            step = parseInt(e.target.e.target.getAttribute("step"));
+                            val = parseInt(e.target.e.target.getAttribute("value"));
+                            min = Math.floor((val)/step)*step;
+                            max = min + step;
+                            msg = messages.step;
+                            msg = msg.replace('{0}', min);
+                            msg = msg.replace('{1}', max);
+                        }
                     }
-                    else if(e.target.validity.badInput && e.target.type == 'number'){
-                        msg = messages.number;
+                    else if(e.target.validity.badInput) {
+                        if(e.target.type == 'number'){
+                            msg = messages.number;
+                        }
                     }
-                    else if(e.target.type == 'date'){
+                    else if(e.target.type == 'date'){ //FIXME: move it to the third level
                         msg = messages.date;
                     }
 

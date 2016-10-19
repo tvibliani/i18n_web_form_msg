@@ -78,62 +78,63 @@
             };
 
 
-            var init_error_message = function(e) {
-                e.target.setCustomValidity("");
-                if (!e.target.validity.valid) {
+            var set_error_message = function(e) {
+                var field = e.target;
+                field.setCustomValidity("");
+                if (!field.validity.valid) {
                     var msg;
-                    if(e.target.validity.valueMissing && e.target.hasAttribute('required')){
-                        var tagname = $( e.target ).prop("tagName").toUpperCase();
+                    if(field.validity.valueMissing && field.hasAttribute('required')){
+                        var tagname = $( field ).prop("tagName").toUpperCase();
                         if ( tagname === "SELECT"){
                             msg = messages.select_required;
                         }
-                        else if (e.target.type == "file") {
+                        else if (field.type == "file") {
                             msg = messages.file_required;
                         } else {
                             msg = messages.required;
                         }
                     }
-                    else if(e.target.validity.typeMismatch) {
-                        if (e.target.type == 'email'){
+                    else if(field.validity.typeMismatch) {
+                        if (field.type == 'email'){
                             msg = messages.email;
                         }
-                        else if(e.target.type == 'url'){
+                        else if(field.type == 'url'){
                             msg = messages.url;
                         }
                     }
-                    else if(e.target.validity.patternMismatch) {
-                        if(e.target.getAttribute("pattern") != 'undefined'){
-                            msg = messages.pattern.replace('{0}', e.target.pattern);
+                    else if(field.validity.patternMismatch) {
+                        if(field.getAttribute("pattern") != 'undefined'){
+                            msg = messages.pattern.replace('{0}', field.pattern);
                         }
                     }
-                    else if(e.target.validity.tooLong) {
-                        if(e.target.getAttribute("maxlength") != 'undefined' ){
-                            msg = messages.maxlength.replace('{0}', e.target.maxlength);
+                    else if(field.validity.tooLong) {
+                        if(field.getAttribute("maxlength") != 'undefined' ){
+                            msg = messages.maxlength.replace('{0}', field.maxlength);
                         }
                     }
-                    else if(e.target.validity.tooShort) {
-                        if(e.target.getAttribute("minlength") != 'undefined'){
-                            msg = messages.minlength.replace('{0}', e.target.getAttribute("minlength"));
+                    else if(field.validity.tooShort) {
+                        if(field.getAttribute("minlength") != 'undefined'){
+                            msg = messages.minlength.replace('{0}', field.getAttribute("minlength"));
                         }
                     }
 
-                    else if(e.target.validity.rangeUnderflow) {
-                        if(e.target.type == 'number' && e.target.getAttribute("min") != 'undefined'){
-                            msg = messages.min.replace('{0}', e.target.min);
+                    else if(field.validity.rangeUnderflow) {
+                        if(field.type == 'number' && field.getAttribute("min") != 'undefined'){
+                            msg = messages.min.replace('{0}', field.min);
                         }
                     }
-                    else if(e.target.validity.rangeOverflow) {
-                        if(e.target.type == 'number' && e.target.getAttribute("max") != 'undefined'){
-                            msg = messages.max.replace('{0}', e.target.getAttribute('max'));
+                    else if(field.validity.rangeOverflow) {
+                        if(field.type == 'number' && field.getAttribute("max") != 'undefined'){
+                            msg = messages.max.replace('{0}', field.getAttribute('max'));
                         }
                     }
-                    else if(e.target.validity.stepMismatch) {
-                        if(e.target.type == 'number' && e.target.getAttribute("step") != 'undefined'){
+                    else if(field.validity.stepMismatch) {
+                        if(field.type == 'number' && field.getAttribute("step") != 'undefined'){
                             var start, step, val, min, max;
                             start = 0;
-                            if(e.target.getAttribute("min") != 'undefined') start = parseInt(e.target.getAttribute("min"));
-                            step = parseInt(e.target.e.target.getAttribute("step"));
-                            val = parseInt(e.target.e.target.getAttribute("value"));
+                            if(field.getAttribute("min") != 'undefined') start = parseInt(field.getAttribute("min"));
+                            step = parseInt(field.getAttribute("step"));
+                            val = parseInt(field.getAttribute("value"));
                             min = Math.floor((val)/step)*step;
                             max = min + step;
                             msg = messages.step;
@@ -141,32 +142,32 @@
                             msg = msg.replace('{1}', max);
                         }
                     }
-                    else if(e.target.validity.badInput) {
-                        if(e.target.type == 'number'){
+                    else if(field.validity.badInput) {
+                        if(field.type == 'number'){
                             msg = messages.number;
                         }
                     }
-                    else if(e.target.validity.customError) {
+                    else if(field.validity.customError) {
                         // TODO
                     }
-                    else if(e.target.type == 'date'){ //FIXME: move it to the third level
+                    else if(field.type == 'date'){ //FIXME: move it to the third level
                         msg = messages.date;
                     }
 
                     if (msg === undefined) {
                         msg = messages.unknown_invalid_value;
                     }
-                    e.target.setCustomValidity(msg);
+                    field.setCustomValidity(msg);
                 }
             };
 
 
             $.fn[setup_msg_fn_name] = function() {
                 this.each(function(i, e_target){
-                    e_target.oninvalid = init_error_message;
+                    e_target.oninvalid = set_error_message;
                     e_target.oninput = function(e) {
                         e.preventDefault();
-                        init_error_message(e);
+                        set_error_message(e);
                     };
                 });
                 return this;

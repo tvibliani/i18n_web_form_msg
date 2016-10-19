@@ -55,25 +55,16 @@
                 required: tr("This field is required."),
                 select_required: tr("Please select an item in the list."),
                 file_required: tr("Please choose a file."),
-                remote: tr("Please fix this field."), //TOCHECK
                 email: tr("Please enter a valid email address."), 
                 url: tr("Please enter a valid URL."), 
                 date: tr("Please enter a valid date."), 
-                dateISO: tr("Please enter a valid date (ISO)."), //TOCHECK
                 number: tr("Please enter a number."), 
-                digits: tr("Please enter only digits."), //TOCHECK
-                creditcard: tr("Please enter a valid credit card number."), //TOCHECK
-                equalTo: tr("Please enter the same value again."), //TOCHECK
-                accept: tr("Please enter a value with a valid extension."), //TOCHECK
                 maxlength: tr("Please enter no more than {0} characters."), 
                 minlength: tr("Please enter at least {0} characters."), 
-                rangelength: tr("Please enter a value between {0} and {1} characters long."), //TOCHECK
-                range: tr("Please enter a value between {0} and {1}."), //TOCHECK
                 max: tr("Please enter a value less than or equal to {0}."), 
                 min: tr("Please enter a value greater than or equal to {0}."), 
                 step: tr("Please enter a valid value. The two nearest valid values are {0} and {1}."),  //added
                 pattern: tr("Please match the requested format: {0}."), //added
-                select: tr("Please select an item in the list."), //added
                 unknown_invalid_value: tr("Invalid value"),
             };
 

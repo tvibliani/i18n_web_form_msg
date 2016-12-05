@@ -95,28 +95,28 @@
                     }
                     else if(field.validity.patternMismatch) {
                         if(field.getAttribute("pattern") != 'undefined'){
-                            msg = messages.pattern.replace('{0}', field.pattern);
+                            msg = messages.pattern.toString().replace('{0}', field.pattern);
                         }
                     }
                     else if(field.validity.tooLong) {
                         if(field.getAttribute("maxlength") != 'undefined' ){
-                            msg = messages.maxlength.replace('{0}', field.maxlength);
+                            msg = messages.maxlength.toString().replace('{0}', field.maxlength);
                         }
                     }
                     else if(field.validity.tooShort) {
                         if(field.getAttribute("minlength") != 'undefined'){
-                            msg = messages.minlength.replace('{0}', field.getAttribute("minlength"));
+                            msg = messages.minlength.toString().replace('{0}', field.getAttribute("minlength"));
                         }
                     }
 
                     else if(field.validity.rangeUnderflow) {
                         if(field.type == 'number' && field.getAttribute("min") != 'undefined'){
-                            msg = messages.min.replace('{0}', field.min);
+                            msg = messages.min.toString().replace('{0}', field.min);
                         }
                     }
                     else if(field.validity.rangeOverflow) {
                         if(field.type == 'number' && field.getAttribute("max") != 'undefined'){
-                            msg = messages.max.replace('{0}', field.getAttribute('max'));
+                            msg = messages.max.toString().replace('{0}', field.getAttribute('max'));
                         }
                     }
                     else if(field.validity.stepMismatch) {
@@ -128,7 +128,7 @@
                             val = parseInt(field.getAttribute("value"));
                             min = Math.floor((val)/step)*step;
                             max = min + step;
-                            msg = messages.step;
+                            msg = messages.step.toString();
                             msg = msg.replace('{0}', min);
                             msg = msg.replace('{1}', max);
                         }
